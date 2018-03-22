@@ -20,22 +20,30 @@ public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeVideoViewHo
 
     private List<YoutubeVideoDescription> videos;
 
-    public YoutubeVideoAdapter(List<YoutubeVideoDescription> list) {
+    public YoutubeVideoAdapter(List<YoutubeVideoDescription> list, View.OnClickListener clickListener) {
+        mOnClickListener = clickListener;
         videos = list;
     }
 
-    public YoutubeVideoAdapter(YoutubeVideoSearchAnswer answ) {
-        this(answ.items);
-    }
+    private View.OnClickListener mOnClickListener ;
+
 
     @Override
     public YoutubeVideoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new YoutubeVideoViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_video, parent, false));
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_video, parent, false);
+
+        v.setOnClickListener(this.mOnClickListener);
+        return new YoutubeVideoViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(YoutubeVideoViewHolder holder, int position) {
         holder.bind(this.videos.get(position));
+
+    }
+
+    public YoutubeVideoDescription getVideoByPosition(int i) {
+        return this.videos.get(i);
     }
 
     @Override

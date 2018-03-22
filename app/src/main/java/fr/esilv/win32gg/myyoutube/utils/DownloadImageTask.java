@@ -12,7 +12,7 @@ import java.io.InputStream;
  * Async download of Bitmat from URL
  * From https://stackoverflow.com/questions/2471935/how-to-load-an-imageview-by-url-in-android
  */
-
+@Deprecated
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     ImageView bmImage;
 
