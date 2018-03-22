@@ -7,6 +7,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -23,11 +25,13 @@ public class YoutubeVideoViewHolder extends RecyclerView.ViewHolder {
     private TextView description;
     private ImageView image;
 
+
     public YoutubeVideoViewHolder(View itemView) {
         super(itemView);
         this.title = itemView.findViewById(R.id.title);
         this.description = itemView.findViewById(R.id.description);
         this.image = itemView.findViewById(R.id.image);
+
     }
 
     public void bind(YoutubeVideoDescription video) {
@@ -35,7 +39,7 @@ public class YoutubeVideoViewHolder extends RecyclerView.ViewHolder {
             this.title.setText(video.snippet.title);
             this.description.setText(video.snippet.description);
 
-            new DownloadImageTask(this.image).execute(video.snippet.thumbnails.get("default").url); //FIXME  multiple downloads
+            Picasso.get().load(video.snippet.thumbnails.get("default").url).into(this.image);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

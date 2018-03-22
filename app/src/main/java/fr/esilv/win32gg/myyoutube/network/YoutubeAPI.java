@@ -3,6 +3,7 @@ package fr.esilv.win32gg.myyoutube.network;
 import java.util.List;
 
 import fr.esilv.win32gg.myyoutube.objects.YoutubeVideoDescription;
+import fr.esilv.win32gg.myyoutube.objects.YoutubeVideoListAnswer;
 import fr.esilv.win32gg.myyoutube.objects.YoutubeVideoSearchAnswer;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -20,5 +21,11 @@ public interface YoutubeAPI {
                                              @Query("q") String query,
                                              @Query("key") String apiKey,
                                              @Query("maxResults") int maxResults);
+
+
+    @GET("videos")
+    Call<YoutubeVideoListAnswer> getVideoDetails(@Query("part") String part,
+                                                        @Query("id") String ids,
+                                                        @Query("key") String apiKey);
 
 }
