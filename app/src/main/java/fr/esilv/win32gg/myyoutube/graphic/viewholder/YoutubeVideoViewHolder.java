@@ -24,6 +24,7 @@ public class YoutubeVideoViewHolder extends RecyclerView.ViewHolder {
     private TextView title;
     private TextView description;
     private ImageView image;
+    private TextView info;
 
 
     public YoutubeVideoViewHolder(View itemView) {
@@ -31,14 +32,14 @@ public class YoutubeVideoViewHolder extends RecyclerView.ViewHolder {
         this.title = itemView.findViewById(R.id.title);
         this.description = itemView.findViewById(R.id.description);
         this.image = itemView.findViewById(R.id.image);
-
+        this.info = itemView.findViewById(R.id.viewholder_info);
     }
 
     public void bind(YoutubeVideoDescription video) {
         try {
             this.title.setText(video.snippet.title);
             this.description.setText(video.snippet.description);
-
+            this.info.setText(video.getViews()+" vues "+video.computeRating()+"% d'avis positifs");
             Picasso.get().load(video.snippet.thumbnails.get("default").url).into(this.image);
         } catch (Exception e) {
             throw new RuntimeException(e);

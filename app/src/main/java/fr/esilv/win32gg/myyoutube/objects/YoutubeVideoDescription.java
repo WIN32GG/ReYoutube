@@ -48,4 +48,7 @@ public class YoutubeVideoDescription implements Serializable{
     public int getCommentCount() {return Integer.parseInt(this.stats.dislikeCount);}
     public String getVideoId() {return id;}
 
+    public String computeRating() {
+        return String.format("%.2f", (float)this.getLikes()/(this.getLikes()+this.getDislikes())*100);
+    }
 }

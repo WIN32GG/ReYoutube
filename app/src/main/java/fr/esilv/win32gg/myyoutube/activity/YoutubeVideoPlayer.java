@@ -17,7 +17,8 @@ import fr.esilv.win32gg.myyoutube.utils.StaticConfig;
 
 public class YoutubeVideoPlayer extends YouTubeBaseActivity {
 
-
+    private TextView likes;
+    private TextView dislikes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,15 @@ public class YoutubeVideoPlayer extends YouTubeBaseActivity {
 
         ((TextView)findViewById(R.id.video_title)).setText(video.snippet.title);
         ((TextView)findViewById(R.id.viewCountTextView)).setText(video.getViews()+" vues");
+
+        this.likes = ((TextView)findViewById(R.id.likesCount));
+        this.dislikes = ((TextView)findViewById(R.id.dislikesCount));
+
+        this.likes.setTextColor(getResources().getColor(R.color.likes));
+        this.dislikes.setTextColor(getResources().getColor(R.color.dislikes));
+
+        this.likes.setText(""+video.getLikes());
+        this.dislikes.setText(""+video.getDislikes());
 
         this.startVideo(video);
     }
